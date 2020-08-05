@@ -11,9 +11,6 @@ let
 in {
   imports = [ nixos-mailserver ];
 
-  security.acme.email = "me@xdefrag.dev";
-  security.acme.acceptTerms = true;
-
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 80 587 993 ];

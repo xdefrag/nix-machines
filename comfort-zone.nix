@@ -24,6 +24,8 @@ in {
 
   services.fail2ban.enable = true;
 
+  nix.trustedUsers = [ "root" "xdefrag" ];
+
   users.users.xdefrag = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
@@ -32,6 +34,9 @@ in {
   };
 
   security.sudo.wheelNeedsPassword = false;
+
+  security.acme.email = "me@xdefrag.dev";
+  security.acme.acceptTerms = true;
 
   nix.gc = {
     automatic = true;
