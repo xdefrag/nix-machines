@@ -3,10 +3,19 @@
 {
   systemd.services.honk = {
     serviceConfig = {
-      WorkingDirectory= "/opt/honk";
+      User = "honk";
+      Group = "www";
+      WorkingDirectory = "/opt/honk";
       ExecStart = "/opt/honk/honk run";
     };
     wantedBy = [ "default.target" ];
+  };
+
+  users.groups.www = {};
+
+  users.users.honk = {
+    isNormalUser = false;
+    group = "www";
   };
 
   services.nginx = {
