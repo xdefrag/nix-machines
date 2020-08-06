@@ -16,7 +16,7 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    virtualHosts."honk.humanramen.dev" = {
+    virtualHosts."xdefrag.dev" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = { proxyPass = "http://0.0.0.0:9000"; };

@@ -19,3 +19,20 @@ Look at
 repository for scripts, and detailed
 [ guide ]( https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/blob/master/docs/setup-guide.rst ). When you finish to tune things around be sure to check your spam score at [ Mail Tester ]( https://www.mail-tester.com/ ).
 
+## honk.nix
+Nix settings for [HONK](https://humungus.tedunangst.com/r/honk) environment.
+It's create systemd service and setup nginx with certs for you. Requires
+built honk in '''/opt/honk''' directory.
+
+TODO: automate it!
+
+## ... but where's machines??...
+OH WELL.
+
+I find really cool that i can just import nix configs in new machine's
+configuration.nix, run '''sudo nixos-rebuild switch''' and that's it!  
+
+Can I do it in one machine? Yeah.  
+Can I do it in multiple instances? Yeah, of course.  
+
+Nix is such an amazing tool, really.
