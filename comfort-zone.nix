@@ -38,6 +38,13 @@ in {
   security.acme.email = "me@xdefrag.dev";
   security.acme.acceptTerms = true;
 
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "0 * * * *  xdefrag ~/nix-machines/bin/update-nix-machines"
+    ];
+  };
+
   nix.gc = {
     automatic = true;
     dates = "daily";

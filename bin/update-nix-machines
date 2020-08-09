@@ -1,0 +1,48 @@
+#!/bin/sh
+PGP_TRUSTED="1F695E6AA59F0E17025D18F8F8851BAA7396A262"
+
+echo "Updating nix-machines"
+
+if [ ! -d ~/nix-machines ]; then
+	cd ~ || exit 1
+	git clone https://git.sr.ht/~xdefrag/nix-machines
+fi
+
+cd ~/nix-machines/ || exit 1
+git remote update || exit 1
+
+UPSTREAM=${1:-'@{u}'}
+LOCAL=$(git rev-parse @)
+REMOTE=$(git rev-parse "$UPSTREAM")
+BASE=$(git merge-base @ "$UPSTREAM")
+
+echo "LOCAL: $LOCAL"
+echo "REMOTE: $REMOTE"
+echo "BASE: $BASE"
+
+if [ "$LOCAL" = "$REMOTE" ]; then
+	echo "Everything up-to-date" && exit 1
+fi
+
+if [ "$LOCAL" = "$BASE" ]; then
+	echo "Checking PGP signature"
+
+	
+
+	if ! git verify-commit "$REMOTE"; then
+		echo "No PGP sig found" && exit 1
+	fi
+
+	
+
+	if ! git verify-commit "$REMOTE" | grep -q "$PGP_TRUSTED"; then
+		echo "PGP sig not trusted" && exit 1
+	fi
+
+	echo "Updating nix-machines repo"
+	git pull origin senpai || exit 1
+fi
+
+echo "Switching to new build"
+sudo nixos-rebuild switch || exit 1
+
