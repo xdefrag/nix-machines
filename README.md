@@ -1,3 +1,6 @@
+# Archived
+Switched to NixOps and moved all configs to https://git.sr.ht/~xdefrag/nix-machines
+
 # Nix Machines
 Nixos scripts for my machines.
 
